@@ -1,0 +1,2 @@
+﻿Preferred time interval: 655	12:13:12.501
+Preferred time interval: 742	12:27:42.633
