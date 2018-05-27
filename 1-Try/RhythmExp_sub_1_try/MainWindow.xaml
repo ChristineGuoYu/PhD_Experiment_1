@@ -1,0 +1,136 @@
+﻿<Window x:Class="RhythmExp_sub_1_try.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RhythmExp_sub_1_try"
+        mc:Ignorable="d"
+        Title="Adaptive Interaction - Rainbow Research Group, University of Cambridge" 
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized" Icon="Images/Clock.png"  ResizeMode="CanMinimize">
+    <Window.Resources>
+        <Style x:Key="MyButtonStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                            BorderThickness="2"
+                            Padding="4,2" 
+                            BorderBrush="LightGray" 
+                            CornerRadius="3" 
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NoChromeButton" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="Chrome" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                                <Setter Property="Opacity" TargetName="Chrome" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+    </Window.Resources>
+    
+    <Grid>
+        <Label x:Name="avgselfpace" FontSize="20" Content="000" Visibility="Hidden" ></Label>
+
+        <Image Name="UpLeft" Visibility="Hidden"  Width="80" Height="80" Margin="175,50,507,376" Source="Images/Cue-1.png"></Image>
+        <Image Name="UpRight" Visibility="Hidden" Width="80" Height="80" Margin="507,50,175,376" Source="Images/Cue-2.png"></Image>
+        <Image Name="DownRight" Visibility="Hidden"  Width="80" Height="80" Margin="507,376,175,50" Source="Images/Cue-3.png"></Image>
+        <Image Name="DownLeft" Visibility="Hidden"  Width="80" Height="80" Margin="175,376,507,50" Source="Images/Cue-4.png"></Image>
+        <Label Name="Prepare_1" Visibility="Hidden"
+               Content="" Width="80" Height="80" FontSize="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="175,50,507,376"></Label>
+        <Label Name="Prepare_2" Visibility="Hidden"  Content="" Width="80" Height="80" FontSize="50"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="507,50,175,376"></Label>
+        <Label Name="Prepare_3" Visibility="Hidden"  Content="" Width="80" Height="80" FontSize="50"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Margin="507,376,175,50"></Label>
+        <Label Name="Prepare_4" Visibility="Hidden"  Content="" Width="80" Height="80" FontSize="50"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="175,376,507,50"></Label>
+        
+        <Label Name="Prepare" Visibility="Hidden"  Content="" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+        
+        <Button Name="UpLeftBtn" Visibility="Hidden"  Style="{DynamicResource NoChromeButton}"  Width="80" Height="80" Margin="175,50,507,376" Click="UpLeftBtn_Click">
+            <!--
+                <Image Stretch ="Fill"  Source="Images/Cue-1.png"/>-->
+        </Button>
+        <Button Name="UpRightBtn" Visibility="Hidden" Style="{DynamicResource NoChromeButton}"  Width="80" Height="80"  Margin="507,50,175,376" Click="UpRightBtn_Click">
+            <!--<Image Stretch ="Fill"  Source="Images/Cue-2.png"/> -->
+        </Button>
+        <Button Name="DownRightBtn" Visibility="Hidden" Style="{DynamicResource NoChromeButton}"  Width="80" Height="80" Margin="507,376,175,50" Click="DownRightBtn_Click">
+            <!--<Image Stretch ="Fill"  Source="Images/Cue-3.png"/> -->
+        </Button>
+        <Button Name="DownLeftBtn" Visibility="Hidden" Style="{DynamicResource NoChromeButton}"  Width="80" Height="80" Margin="175,376,507,50" Click="DownLeftBtn_Click">
+            <!-- <Image Stretch ="Fill"  Source="Images/Cue-4.png"/>-->
+        </Button>
+
+        <Button x:Name="Task34_prepare_1"  Content="" Visibility="Hidden"  Style="{DynamicResource NoChromeButton}"  
+                Height="80" Width="80" FontSize="50" Margin="175,50,507,376" Click="Task34_prepare_1_Click" ></Button>
+        <Button x:Name="Task34_prepare_2"  Content="" Visibility="Hidden"  Style="{DynamicResource NoChromeButton}"  
+                Height="80" Width="80"  FontSize="50"  Margin="507,50,175,376" Click="Task34_prepare_2_Click" ></Button>
+        <Button x:Name="Task34_prepare_3"  Content="" Visibility="Hidden"  Style="{DynamicResource NoChromeButton}"  
+                Height="80" Width="80"  FontSize="50" Margin="507,376,175,50" Click="Task34_prepare_3_Click" ></Button>
+        <Button x:Name="Task34_prepare_4"  Content="" Visibility="Hidden"  Style="{DynamicResource NoChromeButton}"  
+                Height="80" Width="80"  FontSize="50" Margin="175,376,507,50" Click="Task34_prepare_4_Click" ></Button>
+
+        <Button x:Name="TaskBtn0" Height="80" Width="120" Content="Task 0" FontSize="25" Margin="320,60,322,366" Click="TaskBtn0_Click" ></Button>
+        
+        <Button x:Name="TaskBtn1" Height="80" Width="120" Content="Task 1" FontSize="25" Margin="50,213,592,213" Click="TaskBtn1_Click" ></Button>
+        <Button x:Name="TaskBtn2" Height="80" Width="120" Content="Task 2" FontSize="25" Margin="230,213,412,213" Click="TaskBtn2_Click"></Button>
+        <Button x:Name="TaskBtn3" Height="80" Width="120" Content="Task 3" FontSize="25" Margin="413,213,229,213" Click="TaskBtn3_Click"></Button>
+        <Button x:Name="TaskBtn4" Height="80" Width="120" Content="Task 4" FontSize="25" Margin="592,213,50,213" Click="TaskBtn4_Click"></Button>
+        <Button x:Name="Task3Switch" Visibility="Hidden"  Style="{DynamicResource NoChromeButton}"  
+                Height="80" Width="80" Content="+" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Task3Switch_Click" ></Button>
+      
+        <Rectangle x:Name="Cover" Fill="Cyan" Opacity="0.3" Height="100" Width="700" Stroke="DarkBlue" StrokeThickness="3"></Rectangle>
+        <Label x:Name="Rhythm" Content="" Height="30" Width="100" 
+               HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontSize="16" Margin="331,119,331,357" Visibility="Hidden" ></Label>
+        <Label x:Name="Wait" Content="Please wait for the experimenter to set up the experiment according to your preferred clicking rhythm." Height="30" Width="800" 
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" FontSize="16" Margin="-19,161,-19,315" Visibility="Hidden" ></Label>
+        <Button x:Name="DoneSetting" Content="Done!" Width="80" Height="50" FontSize="18" Margin="341,357,341,99" Click="DoneSetting_Click" Visibility="Hidden" ></Button>
+        
+        <local:ChoiceBar x:Name="CB_UL" Visibility="Hidden"  Height="60" Width="255" Margin="87,60,420,386"></local:ChoiceBar>
+        <local:ChoiceBar x:Name="CB_UR" Visibility="Hidden"  Height="60" Width="255"  Margin="419,60,88,386"></local:ChoiceBar>
+        <local:ChoiceBar x:Name="CB_DL" Visibility="Hidden"  Height="60" Width="255" Margin="87,386,420,60"></local:ChoiceBar>
+        <local:ChoiceBar x:Name="CB_DR" Visibility="Hidden"  Height="60" Width="255" Margin="419,386,88,60"></local:ChoiceBar>
+        <local:TaskRating x:Name="Task_Rating" Visibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Center"></local:TaskRating>
+        <Button x:Name="SkipTask" Content="Skip any task?" Width="90" Height="30" Margin="336,420,336,56" Click="SkipTask_Click"></Button>
+        <Button x:Name="SkipTask0" Visibility="Hidden" Content="Task 0" Width="60" Height="30" Margin="210,466,492,10" Click="SkipTask0_Click"></Button>
+        <Button x:Name="SkipTask1" Visibility="Hidden" Content="Task 1" Width="60" Height="30" Margin="281,466,421,10" Click="SkipTask1_Click"></Button>
+        <Button x:Name="SkipTask2" Visibility="Hidden" Content="Task 2" Width="60" Height="30" Margin="351,466,351,10" Click="SkipTask2_Click"></Button>
+        <Button x:Name="SkipTask3"  Visibility="Hidden" Content="Task 3" Width="60" Height="30" Margin="421,466,281,10" Click="SkipTask3_Click"></Button>
+        <Button x:Name="SkipTask4" Visibility="Hidden" Content="Task 4" Width="60" Height="30" Margin="492,466,210,10" Click="SkipTask4_Click"></Button>
+        
+        
+
+
+        <Label Name="Done" Visibility="Hidden" Content="Tasks completed! Thank you!" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+        <Label Name="Results" Visibility="Hidden" FontSize="20" HorizontalAlignment="Center" Width="300" Height="200" Margin="230,298,232,-92">
+        </Label>
+    </Grid>
+</Window>
