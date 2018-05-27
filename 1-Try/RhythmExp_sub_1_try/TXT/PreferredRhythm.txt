@@ -1,0 +1,7 @@
+﻿Preferred time interval: 620	03:28:15.107
+Preferred time interval: 650	02:19:17.563
+Preferred time interval: 576	11:32:15.157
+Preferred time interval: 477	11:33:04.231
+Preferred time interval: 691	11:47:42.355
+Preferred time interval: 588	11:49:01.579
+Preferred time interval: 558	12:04:07.839
